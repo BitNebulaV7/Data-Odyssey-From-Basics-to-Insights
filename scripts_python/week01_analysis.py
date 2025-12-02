@@ -23,3 +23,18 @@ print(std_active_users_pandas)
 
 std_minutes_pandas = df["minutes_per_user"].std()
 print(std_minutes_pandas)
+
+minutes = df["minutes_per_user"].values
+print('min',minutes)
+active = df["active_users"].values
+print('active',active)
+
+avg_minutes_numpy = np.mean(minutes)
+var_active_numpy = np.var(active)
+
+var_active_numpy_unbiased = np.var(active,ddof=1)
+print('var_active_numpy_unbiased',var_active_numpy_unbiased)
+std_active_numpy = np.std(active, ddof=1)
+print('std_active_numpy',std_active_numpy)
+std_minutes_numpy = np.std(active, ddof=1)
+print('std_minutes_numpy',std_minutes_numpy)
