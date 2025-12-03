@@ -16,56 +16,66 @@
 
 - **Pandas** defaults to sample statistics (division by N-1).
 - **NumPy** defaults to population statistics (division by N), unless `ddof=1` is specified.
-- **SQLite** has no built-in variance/stddev functions, so manual formulas are required. Depending on whether you divide by N or N-1, results match NumPy or Pandas.
+- **SQLite** requires manual formulas. Depending on denominator choice, results match either Pandas or NumPy.
 - All three tools are consistent once the definition (sample vs population) is aligned.
 
 ---
 
-## 2. Daily Trend Analysis
+## 2. Daily Trend of Active Users
 
-### Metric
+- The overall trend of active users in Week 01 is upward.
+- Starting from ~1200 users on November 24 and reaching ~2600 users on November 30.
+- Temporary dips on November 27 and 29 suggest natural fluctuations or day-specific behavior.
 
-- Active users over time.
-
-### Approach
-
-- Plot a line chart with **date** on the X-axis and **active_users** on the Y-axis.
-- Look for patterns such as weekend spikes, campaign-driven increases, or seasonal dips.
-
-### Insight
-
-- Daily granularity allows detection of short-term fluctuations.
-- Aggregating to weekly or monthly granularity can highlight longer-term trends.
+![Daily Trend](images/daily_trend.png)
 
 ---
 
-## 3. User Clustering Based on Usage Behavior
+## 3. Minutes per User
 
-### Metrics
+- Average usage time increased from **15 minutes** at the start of the week to **23 minutes** at the end.
+- This indicates not only more users, but also deeper engagement per user.
 
-- `minutes_per_user`
-- `active_users`
+![Minutes per User](images/minutes_per_user.png)
 
-### Method
+---
 
-- Apply clustering (e.g., K-Means) or simple segmentation:
-  - **Light users**: low minutes, high volume.
-  - **Medium users**: moderate minutes.
-  - **Heavy users**: high minutes, smaller group but highly engaged.
+## 4. Installs and Retention
 
-### Insight
+- Installs grew from **300 to 650**.
+- Retention improved from **65% to 78%**.
+- Together, these metrics show both quantitative growth and qualitative improvement in user loyalty.
 
+![Installs and Retention](images/installs_retention.png)
+
+---
+
+## 5. Growth Rate and Moving Average
+
+- Daily growth rate fluctuated, with declines on November 27 and 29.
+- The 3-day moving average shows a smoother, consistent upward trend.
+- This combination highlights both short-term volatility and long-term stability.
+
+![Growth Rate and Moving Average](images/growth_rate_moving_avg.png)
+
+---
+
+## 6. User Clustering Based on Usage Behavior
+
+- **Light users:** low minutes, high volume.
+- **Medium users:** moderate minutes.
+- **Heavy users:** high minutes, smaller group but highly engaged.
 - Segmentation supports tailored strategies:
-  - Light users → need incentives to increase engagement.
+  - Light users → incentives to increase engagement.
   - Heavy users → focus on retention and premium features.
 
 ---
 
-## 4. Educational Note: ddof=0 vs ddof=1
+## 7. Educational Note: ddof=0 vs ddof=1
 
-- **ddof=0 (NumPy default):** Population variance, divide by N. Produces slightly smaller variance/stddev.
-- **ddof=1 (Pandas default):** Sample variance, divide by N-1. Produces unbiased estimates.
-- **SQLite:** Manual formulas can replicate either definition depending on denominator choice.
+- **ddof=0 (NumPy default):** Population variance, divide by N → smaller variance/stddev.
+- **ddof=1 (Pandas default):** Sample variance, divide by N-1 → unbiased estimates.
+- **SQLite:** Manual formulas replicate either definition depending on denominator choice.
 
 **Conclusion:** Pandas and NumPy with `ddof=1` match exactly. NumPy with `ddof=0` and SQLite with division by N give slightly smaller values. This difference is definitional, not computational.
 
@@ -75,5 +85,8 @@
 
 - Pandas, NumPy, and SQLite produce consistent results once definitions are aligned.
 - Daily trend analysis reveals short-term fluctuations in active users.
+- Minutes per user, installs, and retention confirm growth in both quantity and quality.
 - User clustering provides actionable insights for engagement strategies.
 - Understanding the difference between population and sample statistics (ddof=0 vs ddof=1) is essential for accurate reporting.
+
+---
